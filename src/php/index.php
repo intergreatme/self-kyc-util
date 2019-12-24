@@ -14,16 +14,16 @@
 	header('Content-Type: application/json');
 	
 	// variables for our sql insert
-	$db['errors']			= null;
+	$db['errors']		= null;
 	$db['http_headers'] 	= json_encode(getallheaders(), true);
 	$db['raw_post_input'] 	= null;
 	$db['openssl_result'] 	= null;
-	$db['tx_id'] 			= null;
+	$db['tx_id'] 		= null;
 	$db['origin_tx_id'] 	= null;
-	$db['tx_status'] 		= 'error';
+	$db['tx_status'] 	= 'error';
 	$db['tx_timestamp'] 	= null;
-	$db['company'] 			= isset($_GET['name']) ? $_GET['name'] : null; // we use this at IGM to differentiate certain customers
-	$db['config_id'] 		= isset($_GET['config']) ? $_GET['config'] : null; // Required: add your config ID
+	$db['company'] 		= isset($_GET['name']) ? $_GET['name'] : null; // we use this at IGM to differentiate certain customers
+	$db['config_id']	= ""; // Required: add your config ID
 	/*
 	** IGM has four services that emit data that a customer needs to receive and handle.
 	** Feedback -  any feedback messages sent to the customer while they are going through the Self-KYC journey
@@ -187,9 +187,10 @@
 		exit;
 	}
 	// need to use the private key to create a signature in our response to the server
+	// you will need to supply your own key here, of which IGM will require your public key
 	$signature = null;
-	$password = 'ThisIsASecureP@ssw0rdDontYaKnow'; // Required: add the password to unlock your key
-	$data = file_get_contents($enc_key_path.'igm_kyc_dev_verify.pfx');
+	$password = ''; // Required: add the password to unlock your key - get this from IGM
+	$data = file_get_contents($enc_key_path.'igm_kyc_dev_verify.pfx'); // the path to your private key
 	openssl_pkcs12_read($data, $certs, $password);
 	$pri = openssl_pkey_get_private($certs['pkey'], $password);
     $pri_key_details = openssl_pkey_get_details($pri);
