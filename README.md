@@ -1,5 +1,5 @@
-# KYC Utilities
-IGM Self-KYC-Util is a set of tools to help developers consume services from IGM (www.intergreatme.com)
+# Intergreatme Remote-KYC Utilities
+IGM Remote-KYC-Util is a set of tools to help developers consume services from Intergreatme (www.intergreatme.com)
 
 Making use of the IGM KYC portal works off of a service provider sending us a whitelist entry to kickstart the process. Thereafter, IGM will send various responses back to the service provider as the user goes through the process. The intent with being verbose is to ensure the service provider can provide adequate support to the user to reduce the need for IGM to facilitate support.
 
@@ -11,4 +11,4 @@ Feedback API calls tell the service provider information about what the user is 
 - Completion:
 Completion is the final step of the transaction where we send the payload of information to the service provider with the KYC result included.
 
-We have also included our ID validation util.
+We have also included our ID validation utility to validate RSA ID Numbers.
