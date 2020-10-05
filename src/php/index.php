@@ -44,7 +44,7 @@
 			break;
 		default:
 			$db['errors'] .= 'Correct GET parameter missing, URI should be api/?completion, api/?status or api/?feedback.';
-			WriteToSQLite($db);
+			WriteToSql($db);
 			exit;
 		break;
 	}
@@ -183,7 +183,7 @@
 	if($db['openssl_result'] !== 1)
 	{
 		$db['errors'] .= 'Unable to verify signature: Openssl said: '.openssl_error_string().'.';
-		WriteToSQLite($db);
+		WriteToSql($db);
 		exit;
 	}
 	// need to use the private key to create a signature in our response to the server
@@ -201,9 +201,9 @@
 	// send it back to the server
 	echo json_encode($sig, true);
 	// write the transaction to the database
-	WriteToSQLite($db);
+	WriteToSql($db);
 
-	function WriteToSQLite($db)
+	function WriteToSql($db)
 	{
 		// make necessary modifications
 		if($db['raw_post_input'] != null)
